@@ -16,10 +16,10 @@ Ebira_dict ={
     "ize" : "wealth",
     "engworo" : "peace",
     "ohu" : "market",
-    " " : " ",
-    " " : " ",
-    " " : " ",
-    " " : " ",
+    "ira" : "light",
+    "akoro" : "weldone",
+    "ampo" : "bag",
+    "garawa" : "bucket",
 }
 #Ask  user for input
 word= input("Enter an Ebira word:").lower()
@@ -28,3 +28,4 @@ if word in Ebira_dict:
     print(f"The English meaning of '{word}' is: {Ebira_dict[word]}")
 else:
     print("Sorry, that word is not in the dictionary.")
+

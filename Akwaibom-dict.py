@@ -32,3 +32,35 @@ if word== ("mmong"):
   print("mmong translate:", akwaibom_dict["mmong"], "english")
 if word== ("mbonomi"):
   print("mbonomi translate:", akwaibom_dict["mmong"], "english")
+if word== ("ufokgwet"):
+  print("ufokgwet translate:", akwaibom_dict["ufokgwet"], "english")
+if word== ("eyen"):
+  print("eyen translate:", akwaibom_dict["eyen"], "english")
+if word== ("ufok"):
+  print("ufok translate:", akwaibom_dict["ufok"], "english")
+if word== ("abasi"):
+  print("abasi translate:", akwaibom_dict["abasia"], "english)
+if word== ("ubong"):
+  print("ubong translate:", akwaibom_dict["ubong"], "english)
+if word== ("ete"):
+  print("ete translate:", akwaibom_dict["ete"], "english)
+if word== ("eka"):
+  print("eka translate:", akwaibom_dict["eka"], "english)
+if word== ("uduak"):
+  print("uduak translate:", akwaibom_dict["uduak"], "english)
+if word== ("ekpe"):
+  print("ekpe translate:", akwaibom_dict["ekpe"], "english)
+if word== ("usan"):
+  print("usan translate:", akwaibom_dict["usan"], "english)
+if word== ("ekpaan"):
+  print("ekpaan translate:", akwaibom_dict["ekpaan"], "english)
+if word== ("afu"):
+  print("afu translate:", akwaibom_dict["afu"], "english)
+if word== ("tie"):
+  print("tie translate:", akwaibom_dict["tie"], "english)
+if word== ("di"): 
+  print("di translate:", akwaibom_dict["di"], "english)
+if word== ("sosong"):
+  print("sosong translate:", akwaibom_dict["sosong"], "english)
+if word== ("daka"):
+  print("daka translate:", akwaibom_dict["daka"], "english)

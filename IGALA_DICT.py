@@ -1,7 +1,7 @@
 print("hello user, below are a list of words in igala language that can be translated to english, select which word you wish to translate to english")
 print("Please, select an igala word from the list; awa, agba, ona, una, omi, ikpolo, eju_ona, eja, ujewn, otakada, shekpulu, eda, ejo, usha, ikpa, akpe, abia, obala, ugba, obe, oche")
 word= input("Enter the igala word to translate: ")
-igala_dict ={
+main_dict ={
     "awa":'weldone',
     'agba':'ThankYou',
     "ona":"tomorrow",

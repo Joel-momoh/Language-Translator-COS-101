@@ -1,5 +1,5 @@
 
-Ebira_dict ={
+main_dict ={
     "nyene" : "good morning",
     "anyar' oodu" : "good afternoon",
     "ngwao " : "hello",

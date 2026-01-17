@@ -1,4 +1,4 @@
-hausa_dict = {
+main_dict = {
     "sannu": "hello",
     "ina kwana": "good morning",
     "lafiya": "fine",

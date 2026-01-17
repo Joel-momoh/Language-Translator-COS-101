@@ -1,25 +1,28 @@
 import streamlit as st
 import importlib
-import os
 
 st.title("Language Translator")
 
-file_list = [f for f in os.listdir('.') if f.endswith('.py') and f != 'app.py']
+# This is the "Better Way" - we manually map the Name to the Filename
+# Left side is what people see, Right side is the exact filename on GitHub
+languages = {
+    "Ebira": "ebira_dict",
+    "Hausa": "hausa",
+    "Akwaibom": "Akwaibom_dict",
+    "Igala": "IGALA_DICT"
+}
 
-display_names = {}
-for f in file_list:
-    raw_name = f.replace('.py', '')
-    clean_name = raw_name.replace('dict', '').replace('-', ' ').replace('', ' ').strip().upper()
-    display_names[clean_name] = raw_name
+selection = st.selectbox("Select a language:", list(languages.keys()))
 
-selected_language = st.selectbox("Select a language:", list(display_names.keys()))
-
-if selected_language:
-    file_to_import = display_names[selected_language]
+if selection:
+    # Get the filename from our map above
+    file_to_load = languages[selection]
     
     try:
-        module = importlib.import_module(file_to_import)
+        # Import the file
+        module = importlib.import_module(file_to_load)
         
+        # Look for the dictionary list inside that file
         dictionary = None
         for attribute in dir(module):
             if attribute.endswith('_dict') or attribute == 'main_dict':
@@ -27,8 +30,8 @@ if selected_language:
                 break
         
         if dictionary:
-            st.subheader(f"{selected_language} Dictionary")
-            user_input = st.text_input(f"Enter a word in {selected_language}:").lower().strip()
+            st.subheader(f"{selection} Dictionary")
+            user_input = st.text_input(f"Enter a word in {selection}:").lower().strip()
             
             if st.button("Translate"):
                 if user_input:
@@ -39,7 +42,7 @@ if selected_language:
                 else:
                     st.warning("Please type a word.")
         else:
-            st.error("Error: Dictionary list not found in file.")
+            st.error(f"Could not find the word list inside the {selection} file.")
             
     except Exception as e:
-        st.error(f"Error loading {selected_language}. Please check the filename on GitHub.")
+        st.error(f"The app cannot find the file named '{file_to_load}.py' on GitHub. Please check your spelling.")

@@ -26,8 +26,8 @@ languages = {
         "garawa" : "bucket",
     },
     "Igala": {
-        "awa":'weldone',
-        "agba':'ThankYou",
+        "awa":"weldone",
+        "agba":"ThankYou",
         "ona":"tomorrow",
         "una":"fire",
         "omi":"water",

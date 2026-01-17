@@ -1,48 +1,44 @@
 import streamlit as st
-import importlib
 
 st.title("Language Translator")
 
-# This is the "Better Way" - we manually map the Name to the Filename
-# Left side is what people see, Right side is the exact filename on GitHub
 languages = {
-    "Ebira": "ebira_dict",
-    "Hausa": "hausa",
-    "Akwaibom": "Akwaibom_dict",
-    "Igala": "IGALA_DICT"
+    "Ebira": {
+        
+        
+    },
+    "Hausa": {
+        "sannu": "hello",
+        "gida": "house",
+        "ruwa": "water",
+        "abinci": "food",
+        "kwana": "sleep"
+        
+    },
+    "Akwaibom": {
+        "abaudie": "how are you",
+        "mesiere": "good morning",
+        "edi": "come",
+        "tie": "sit",
+        "idat": "mad"
+        
+    }
 }
 
 selection = st.selectbox("Select a language:", list(languages.keys()))
 
 if selection:
-    # Get the filename from our map above
-    file_to_load = languages[selection]
+    st.subheader(f"{selection} Dictionary")
     
-    try:
-        # Import the file
-        module = importlib.import_module(file_to_load)
-        
-        # Look for the dictionary list inside that file
-        dictionary = None
-        for attribute in dir(module):
-            if attribute.endswith('_dict') or attribute == 'main_dict':
-                dictionary = getattr(module, attribute)
-                break
-        
-        if dictionary:
-            st.subheader(f"{selection} Dictionary")
-            user_input = st.text_input(f"Enter a word in {selection}:").lower().strip()
-            
-            if st.button("Translate"):
-                if user_input:
-                    if user_input in dictionary:
-                        st.success(f"English Translation: {dictionary[user_input]}")
-                    else:
-                        st.info("Word not found.")
-                else:
-                    st.warning("Please type a word.")
+    current_dict = languages[selection]
+    
+    user_input = st.text_input(f"Enter a word in {selection}:").lower().strip()
+    
+    if st.button("Translate"):
+        if user_input:
+            if user_input in current_dict:
+                st.success(f"English Translation: {current_dict[user_input]}")
+            else:
+                st.info("Word not found in this dictionary.")
         else:
-            st.error(f"Could not find the word list inside the {selection} file.")
-            
-    except Exception as e:
-        st.error(f"The app cannot find the file named '{file_to_load}.py' on GitHub. Please check your spelling.")
+            st.warning("Please type a word first.")

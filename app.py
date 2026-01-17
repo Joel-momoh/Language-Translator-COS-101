@@ -4,28 +4,43 @@ import os
 
 st.title("Language Translator")
 
-# This looks at your files like Akwaibom-dict.py, IGALA_DICT.py, etc.
 file_list = [f for f in os.listdir('.') if f.endswith('.py') and f != 'app.py']
-languages = [f.replace('.py', '') for f in file_list]
 
-selection = st.selectbox("Select a language:", languages)
+display_names = {}
+for f in file_list:
+    raw_name = f.replace('.py', '')
+    clean_name = raw_name.replace('dict', '').replace('', ' ').title().strip()
+    display_names[clean_name] = raw_name
 
-if selection:
-    # This opens the file you selected from the list
-    module = importlib.import_module(selection)
+selected_language = st.selectbox("Select a language:", list(display_names.keys()))
+
+if selected_language:
+    file_to_import = display_names[selected_language]
     
-    # This pulls the 'main_dict' variable from that file
-    if hasattr(module, 'main_dict'):
-        dictionary = getattr(module, 'main_dict')
+    try:
+        module = importlib.import_module(file_to_import)
         
-        user_input = st.text_input(f"Enter a word in {selection}:").lower().strip()
-
-        if user_input:
-            if user_input in dictionary:
-                translation = dictionary[user_input]
-                st.write("English translation:")
-                st.success(translation)
-            else:
-                st.error("Word not found in this dictionary.")
-    else:
-        st.error(f"The file {selection}.py is missing the 'main_dict' list.")
+        dictionary = None
+        for attribute in dir(module):
+            if attribute.endswith('_dict'):
+                dictionary = getattr(module, attribute)
+                break
+        
+        if dictionary:
+            st.subheader(f"{selected_language} Dictionary")
+            user_input = st.text_input(f"Enter a word in {selected_language}:").lower().strip()
+            
+            # This adds the button you asked for
+            if st.button("Translate"):
+                if user_input:
+                    if user_input in dictionary:
+                        st.success(f"English Translation: {dictionary[user_input]}")
+                    else:
+                        st.info("Word not found in this dictionary.")
+                else:
+                    st.warning("Please type a word first.")
+        else:
+            st.error("Error: Could not find the dictionary list inside the file.")
+            
+    except Exception as e:
+        st.error("Error: Ensure the file name has no dashes and is formatted correctly.")

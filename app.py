@@ -87,7 +87,7 @@ languages = {
         "usan": "plate",
         "ekpaan": "spoon",
         "afu": "you",
-        'tie": "sitdown",
+        "tie": "sitdown",
         "di": "come",
         "sosong": "thankyou",
         "daka": "go"
